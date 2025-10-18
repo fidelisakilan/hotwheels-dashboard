@@ -36,11 +36,6 @@ class _StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("HotWheels"),
-        centerTitle: true,
-        backgroundColor: Colors.red.shade50,
-      ),
       body: StreamBuilder<List<TyreModel>>(
         stream: bloc.lapDetailsStream,
         builder: (context, snapshot) {

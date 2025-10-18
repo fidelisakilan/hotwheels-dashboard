@@ -13,10 +13,9 @@ class LapDetailWidget extends StatefulWidget {
 }
 
 class _LapDetailWidgetState extends State<LapDetailWidget> {
-  var currentTab = DetailTabs.temp;
+  var currentTab = DetailTabs.visual;
 
   void changeTab(DetailTabs tab) {
-    print(tab);
     setState(() {
       currentTab = tab;
     });
@@ -24,71 +23,42 @@ class _LapDetailWidgetState extends State<LapDetailWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      color: Colors.grey[100],
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SegmentedButtonWidget(currentTab: currentTab, changeTab: changeTab),
-          Text('TYRE ANALYSIS', style: Theme.of(context).textTheme.titleLarge),
-          Text(
-            'Track Temperature: ${widget.tyre.trackTemperature}°C',
-            style: Theme.of(context).textTheme.bodyMedium,
+    return Column(
+      children: [
+        Container(
+          alignment: Alignment.center,
+          color: const Color(0xFFE10600),
+          padding: const EdgeInsets.all(16),
+          child: Text(
+            'HotWheels',
+            style: Theme.of(
+              context,
+            ).textTheme.titleLarge?.copyWith(color: Colors.white),
           ),
-          Expanded(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                const crossAxisCount = 2;
-                const spacing = 16.0;
-
-                final availableWidth =
-                    (constraints.maxWidth - spacing * (crossAxisCount - 1));
-                final availableHeight =
-                    (constraints.maxHeight - spacing * (crossAxisCount - 1));
-                final cellSize = math.min(
-                  availableWidth / crossAxisCount,
-                  availableHeight / crossAxisCount,
-                );
-                return Center(
-                  child: SizedBox(
-                    width:
-                        cellSize * crossAxisCount +
-                        spacing * (crossAxisCount - 1),
-                    height:
-                        cellSize * crossAxisCount +
-                        spacing * (crossAxisCount - 1),
-                    child: GridView.count(
-                      crossAxisCount: crossAxisCount,
-                      crossAxisSpacing: spacing,
-                      mainAxisSpacing: spacing,
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: [
-                        _TyreWidget(
-                          position: 'Front Left',
-                          tyreDetail: widget.tyre.frontLeft,
-                        ),
-                        _TyreWidget(
-                          position: 'Front Right',
-                          tyreDetail: widget.tyre.frontRight,
-                        ),
-                        _TyreWidget(
-                          position: 'Rear Left',
-                          tyreDetail: widget.tyre.rearLeft,
-                        ),
-                        _TyreWidget(
-                          position: 'Rear Right',
-                          tyreDetail: widget.tyre.rearRight,
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
+        ),
+        Expanded(
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            color: Colors.grey[100],
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SegmentedButtonWidget(
+                  currentTab: currentTab,
+                  changeTab: changeTab,
+                ),
+                Expanded(
+                  child: currentTab == DetailTabs.visual
+                      ? TyreVisualWidget(tyre: widget.tyre)
+                      : currentTab == DetailTabs.temp
+                      ? TyreTempWidget(tyre: widget.tyre)
+                      : TyrePressureWidget(tyre: widget.tyre),
+                ),
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -108,6 +78,10 @@ class SegmentedButtonWidget extends StatelessWidget {
       child: SegmentedButton<DetailTabs>(
         segments: const <ButtonSegment<DetailTabs>>[
           ButtonSegment<DetailTabs>(
+            value: DetailTabs.visual,
+            label: Text('Tyre Visuals'),
+          ),
+          ButtonSegment<DetailTabs>(
             value: DetailTabs.temp,
             label: Text('Tyre Temperature'),
           ),
@@ -115,16 +89,79 @@ class SegmentedButtonWidget extends StatelessWidget {
             value: DetailTabs.pressure,
             label: Text('Tyre Pressure'),
           ),
-          ButtonSegment<DetailTabs>(
-            value: DetailTabs.visual,
-            label: Text('Tyre Visuals'),
-          ),
         ],
         showSelectedIcon: false,
         selected: <DetailTabs>{currentTab},
         onSelectionChanged: (Set<DetailTabs> newSelection) =>
             changeTab(newSelection.first),
       ),
+    );
+  }
+}
+
+class TyreTempWidget extends StatelessWidget {
+  const TyreTempWidget({super.key, required this.tyre});
+  final TyreModel tyre;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [Text('Track Temperature: ${tyre.trackTemperature}°C')],
+    );
+  }
+}
+
+class TyrePressureWidget extends StatelessWidget {
+  const TyrePressureWidget({super.key, required this.tyre});
+  final TyreModel tyre;
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+
+class TyreVisualWidget extends StatelessWidget {
+  const TyreVisualWidget({super.key, required this.tyre});
+  final TyreModel tyre;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        const crossAxisCount = 2;
+        const spacing = 16.0;
+
+        final availableWidth =
+            (constraints.maxWidth - spacing * (crossAxisCount - 1));
+        final availableHeight =
+            (constraints.maxHeight - spacing * (crossAxisCount - 1));
+        final cellSize = math.min(
+          availableWidth / crossAxisCount,
+          availableHeight / crossAxisCount,
+        );
+        return Center(
+          child: SizedBox(
+            width: cellSize * crossAxisCount + spacing * (crossAxisCount - 1),
+            height: cellSize * crossAxisCount + spacing * (crossAxisCount - 1),
+            child: GridView.count(
+              crossAxisCount: crossAxisCount,
+              crossAxisSpacing: spacing,
+              mainAxisSpacing: spacing,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                _TyreWidget(position: 'Front Left', tyreDetail: tyre.frontLeft),
+                _TyreWidget(
+                  position: 'Front Right',
+                  tyreDetail: tyre.frontRight,
+                ),
+                _TyreWidget(position: 'Rear Left', tyreDetail: tyre.rearLeft),
+                _TyreWidget(position: 'Rear Right', tyreDetail: tyre.rearRight),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
