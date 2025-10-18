@@ -1,7 +1,7 @@
-import 'package:f1_analyzer/lap_detail_bloc.dart';
-import 'package:f1_analyzer/lap_detail_model.dart';
-import 'package:f1_analyzer/lap_detail_widget.dart';
-import 'package:f1_analyzer/lap_list_widget.dart';
+import 'package:f1_analyzer/bloc/lap_detail_bloc.dart';
+import 'package:f1_analyzer/model/lap_detail_model.dart';
+import 'package:f1_analyzer/widgets/lap_detail_widget.dart';
+import 'package:f1_analyzer/widgets/lap_list_widget.dart';
 import 'package:flutter/material.dart';
 
 class StartPage extends StatefulWidget {
@@ -47,7 +47,8 @@ class _StartPageState extends State<StartPage> {
           if (snapshot.hasData) {
             return Row(
               children: [
-                Expanded(
+                SizedBox(
+                  width: 200,
                   child: LapListWidget(
                     laps: snapshot.data!,
                     onTap: setSelectedIndex,

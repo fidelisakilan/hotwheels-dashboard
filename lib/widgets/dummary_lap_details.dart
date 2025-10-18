@@ -1,9 +1,10 @@
-import 'package:f1_analyzer/lap_detail_model.dart';
+import 'package:f1_analyzer/model/lap_detail_model.dart';
 
 final List<TyreModel> dummyLapDetails = [
   TyreModel(
     compound: TyreCompound.soft,
     lapNumber: 1,
+    trackTemperature: 20,
     frontLeft: TyreDetailModel(
       color: TyreColor.matteBlack,
       wearPattern: WearPattern.even,
@@ -11,7 +12,6 @@ final List<TyreModel> dummyLapDetails = [
       isGraining: false,
       tyrePressure: 20,
       tyreTemperature: 20,
-      trackTemperature: 20,
     ),
     frontRight: TyreDetailModel(
       color: TyreColor.matteBlack,
@@ -20,7 +20,6 @@ final List<TyreModel> dummyLapDetails = [
       isGraining: false,
       tyrePressure: 20,
       tyreTemperature: 20,
-      trackTemperature: 20,
     ),
     rearLeft: TyreDetailModel(
       color: TyreColor.matteBlack,
@@ -29,7 +28,6 @@ final List<TyreModel> dummyLapDetails = [
       isGraining: false,
       tyrePressure: 20,
       tyreTemperature: 20,
-      trackTemperature: 20,
     ),
     rearRight: TyreDetailModel(
       color: TyreColor.matteBlack,
@@ -38,12 +36,12 @@ final List<TyreModel> dummyLapDetails = [
       isGraining: false,
       tyrePressure: 20,
       tyreTemperature: 20,
-      trackTemperature: 20,
     ),
   ),
   TyreModel(
     compound: TyreCompound.soft,
     lapNumber: 2,
+    trackTemperature: 24,
     frontLeft: TyreDetailModel(
       color: TyreColor.glossyBlack,
       wearPattern: WearPattern.even,
@@ -51,7 +49,6 @@ final List<TyreModel> dummyLapDetails = [
       isGraining: false,
       tyrePressure: 20,
       tyreTemperature: 20,
-      trackTemperature: 20,
     ),
     frontRight: TyreDetailModel(
       color: TyreColor.glossyBlack,
@@ -60,7 +57,6 @@ final List<TyreModel> dummyLapDetails = [
       isGraining: false,
       tyrePressure: 20,
       tyreTemperature: 20,
-      trackTemperature: 20,
     ),
     rearLeft: TyreDetailModel(
       color: TyreColor.glossyBlack,
@@ -69,7 +65,6 @@ final List<TyreModel> dummyLapDetails = [
       isGraining: false,
       tyrePressure: 20,
       tyreTemperature: 20,
-      trackTemperature: 20,
     ),
     rearRight: TyreDetailModel(
       color: TyreColor.glossyBlack,
@@ -78,7 +73,6 @@ final List<TyreModel> dummyLapDetails = [
       isGraining: false,
       tyrePressure: 20,
       tyreTemperature: 20,
-      trackTemperature: 20,
     ),
   ),
 ];

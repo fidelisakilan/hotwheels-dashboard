@@ -1,5 +1,5 @@
-import 'package:f1_analyzer/dummary_lap_details.dart';
-import 'package:f1_analyzer/lap_detail_model.dart';
+import 'package:f1_analyzer/widgets/dummary_lap_details.dart';
+import 'package:f1_analyzer/model/lap_detail_model.dart';
 import 'package:rxdart/rxdart.dart';
 
 class LapDetailBloc {
