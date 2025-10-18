@@ -7,10 +7,10 @@ enum TyreColor { matteBlack, glossyBlack, purpleTin, greyBlack, paleGrey }
 class TyreModel {
   final int lapNumber;
   final TyreCompound compound;
-  final LapTyreDetailModel frontLeft;
-  final LapTyreDetailModel frontRight;
-  final LapTyreDetailModel rearLeft;
-  final LapTyreDetailModel rearRight;
+  final TyreDetailModel frontLeft;
+  final TyreDetailModel frontRight;
+  final TyreDetailModel rearLeft;
+  final TyreDetailModel rearRight;
 
   TyreModel({
     required this.lapNumber,
@@ -22,7 +22,7 @@ class TyreModel {
   });
 }
 
-class LapTyreDetailModel {
+class TyreDetailModel {
   final TyreColor color;
   final WearPattern wearPattern;
   final bool sidewallDefomation;
@@ -31,7 +31,7 @@ class LapTyreDetailModel {
   final int tyreTemperature;
   final int trackTemperature;
 
-  LapTyreDetailModel({
+  TyreDetailModel({
     required this.color,
     required this.wearPattern,
     required this.sidewallDefomation,

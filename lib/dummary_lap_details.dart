@@ -4,7 +4,7 @@ final List<TyreModel> dummyLapDetails = [
   TyreModel(
     compound: TyreCompound.soft,
     lapNumber: 1,
-    frontLeft: LapTyreDetailModel(
+    frontLeft: TyreDetailModel(
       color: TyreColor.matteBlack,
       wearPattern: WearPattern.even,
       sidewallDefomation: false,
@@ -13,7 +13,7 @@ final List<TyreModel> dummyLapDetails = [
       tyreTemperature: 20,
       trackTemperature: 20,
     ),
-    frontRight: LapTyreDetailModel(
+    frontRight: TyreDetailModel(
       color: TyreColor.matteBlack,
       wearPattern: WearPattern.even,
       sidewallDefomation: false,
@@ -22,7 +22,7 @@ final List<TyreModel> dummyLapDetails = [
       tyreTemperature: 20,
       trackTemperature: 20,
     ),
-    rearLeft: LapTyreDetailModel(
+    rearLeft: TyreDetailModel(
       color: TyreColor.matteBlack,
       wearPattern: WearPattern.even,
       sidewallDefomation: false,
@@ -31,7 +31,7 @@ final List<TyreModel> dummyLapDetails = [
       tyreTemperature: 20,
       trackTemperature: 20,
     ),
-    rearRight: LapTyreDetailModel(
+    rearRight: TyreDetailModel(
       color: TyreColor.matteBlack,
       wearPattern: WearPattern.even,
       sidewallDefomation: false,
@@ -44,7 +44,7 @@ final List<TyreModel> dummyLapDetails = [
   TyreModel(
     compound: TyreCompound.soft,
     lapNumber: 2,
-    frontLeft: LapTyreDetailModel(
+    frontLeft: TyreDetailModel(
       color: TyreColor.glossyBlack,
       wearPattern: WearPattern.even,
       sidewallDefomation: false,
@@ -53,7 +53,7 @@ final List<TyreModel> dummyLapDetails = [
       tyreTemperature: 20,
       trackTemperature: 20,
     ),
-    frontRight: LapTyreDetailModel(
+    frontRight: TyreDetailModel(
       color: TyreColor.glossyBlack,
       wearPattern: WearPattern.even,
       sidewallDefomation: false,
@@ -62,7 +62,7 @@ final List<TyreModel> dummyLapDetails = [
       tyreTemperature: 20,
       trackTemperature: 20,
     ),
-    rearLeft: LapTyreDetailModel(
+    rearLeft: TyreDetailModel(
       color: TyreColor.glossyBlack,
       wearPattern: WearPattern.even,
       sidewallDefomation: false,
@@ -71,7 +71,7 @@ final List<TyreModel> dummyLapDetails = [
       tyreTemperature: 20,
       trackTemperature: 20,
     ),
-    rearRight: LapTyreDetailModel(
+    rearRight: TyreDetailModel(
       color: TyreColor.glossyBlack,
       wearPattern: WearPattern.even,
       sidewallDefomation: false,
