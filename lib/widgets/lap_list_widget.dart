@@ -43,19 +43,24 @@ class TyreIconWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 30,
-      height: 30,
-      decoration: BoxDecoration(
-        color: Colors.black,
-        shape: BoxShape.circle,
-        border: Border.all(color: compound.color, width: 3),
-      ),
-      child: Center(
-        child: Text(
-          compound.displayName[0],
-          style: Theme.of(
-            context,
-          ).textTheme.bodySmall?.copyWith(color: Colors.white),
+      decoration: BoxDecoration(color: Colors.black, shape: BoxShape.circle),
+      padding: const EdgeInsets.all(2),
+      child: Container(
+        width: 30,
+        height: 30,
+        decoration: BoxDecoration(
+          color: Colors.black,
+          shape: BoxShape.circle,
+          border: Border.all(color: compound.color, width: 2.5),
+        ),
+        child: Center(
+          child: Text(
+            compound.displayName[0],
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
       ),
     );
