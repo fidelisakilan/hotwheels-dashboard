@@ -36,6 +36,10 @@ class _StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: bloc.storeDummyLapDetails,
+        child: Icon(Icons.add),
+      ),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text(
