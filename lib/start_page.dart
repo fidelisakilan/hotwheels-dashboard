@@ -36,6 +36,15 @@ class _StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xFFE10600),
+        title: Text(
+          'HotWheels',
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(color: Colors.white),
+        ),
+      ),
       body: StreamBuilder<List<TyreModel>>(
         stream: bloc.lapDetailsStream,
         builder: (context, snapshot) {
@@ -47,6 +56,7 @@ class _StartPageState extends State<StartPage> {
                   child: LapListWidget(
                     laps: snapshot.data!,
                     onTap: setSelectedIndex,
+                    selectedIndex: selectedIndex,
                   ),
                 ),
                 Expanded(

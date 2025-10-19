@@ -2,8 +2,14 @@ import 'package:f1_analyzer/model/lap_detail_model.dart';
 import 'package:flutter/material.dart';
 
 class LapListWidget extends StatefulWidget {
-  const LapListWidget({super.key, required this.laps, required this.onTap});
+  const LapListWidget({
+    super.key,
+    required this.laps,
+    required this.onTap,
+    required this.selectedIndex,
+  });
   final List<TyreModel> laps;
+  final int selectedIndex;
   final Function(int) onTap;
 
   @override
@@ -19,11 +25,20 @@ class _LapListWidgetState extends State<LapListWidget> {
         final lap = widget.laps[index];
         return ListTile(
           onTap: () => widget.onTap(index),
+          selectedTileColor: index == widget.selectedIndex
+              ? const Color(0xFFE10600) // F1 red background when selected
+              : null,
+          selected: index == widget.selectedIndex,
           title: Row(
             children: [
               Text(
                 "Lap ${lap.lapNumber}",
-                style: Theme.of(context).textTheme.bodyLarge,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: index == widget.selectedIndex
+                      ? Colors
+                            .white // White text when selected
+                      : null, // Default theme color when not selected
+                ),
               ),
               Spacer(),
               TyreIconWidget(compound: lap.compound),
