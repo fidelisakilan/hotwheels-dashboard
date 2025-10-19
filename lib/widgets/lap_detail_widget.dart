@@ -183,7 +183,7 @@ class ComprehensiveTyreWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  tyre.track.toUpperCase(),
+                  "Monza",
                   style: F1Fonts.data(
                     fontSize: 14,
                     color: Colors.white,

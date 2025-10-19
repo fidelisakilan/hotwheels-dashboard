@@ -1,37 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f1_analyzer/model/lap_detail_model.dart';
-import 'package:rxdart/rxdart.dart';
 
 class LapDetailBloc {
-  final List<TyreModel> lapDetails = [];
-  final BehaviorSubject<List<TyreModel>> lapDetailsSubject =
-      BehaviorSubject<List<TyreModel>>();
-  Stream<List<TyreModel>> get lapDetailsStream => lapDetailsSubject.stream;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  void fetchLapDetails() async {
-    try {
-      final firestore = FirebaseFirestore.instance;
-      final querySnapshot = await firestore.collection('laps').get();
+  late final Stream<List<TyreModel>> _lapDetailsStream;
 
-      final List<TyreModel> lapDetails = [];
-
-      for (var doc in querySnapshot.docs) {
-        final data = doc.data();
-        final tyreModel = _convertFirestoreToTyreModel(data);
-        if (tyreModel != null) {
-          lapDetails.add(tyreModel);
-        }
-      }
-
-      // Sort by lap number
-      lapDetails.sort((a, b) => b.lapNumber.compareTo(a.lapNumber));
-
-      lapDetailsSubject.add(lapDetails);
-    } catch (e) {
-      print('Error fetching lap details from Firestore: $e');
-      // lapDetailsSubject.add(List<TyreModel>.from(dummyLapDetails));
-    }
+  LapDetailBloc() {
+    _lapDetailsStream = _firestore
+        .collection('laps')
+        .orderBy('lap_number', descending: true)
+        .snapshots()
+        .map((snapshot) {
+          final List<TyreModel> lapDetails = [];
+          for (var doc in snapshot.docs) {
+            final data = doc.data();
+            final tyreModel = _convertFirestoreToTyreModel(data);
+            if (tyreModel != null) {
+              lapDetails.add(tyreModel);
+            }
+          }
+          return lapDetails;
+        });
   }
+
+  Stream<List<TyreModel>> get lapDetailsStream => _lapDetailsStream;
 
   TyreModel? _convertFirestoreToTyreModel(Map<String, dynamic> data) {
     try {
@@ -138,9 +131,5 @@ class LapDetailBloc {
       print('Error converting Firestore data to TyreModel: $e');
       return null;
     }
-  }
-
-  void dispose() {
-    lapDetailsSubject.close();
   }
 }

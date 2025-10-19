@@ -24,13 +24,7 @@ class _StartPageState extends State<StartPage> {
   @override
   void initState() {
     super.initState();
-    bloc.fetchLapDetails();
-  }
-
-  @override
-  void dispose() {
-    bloc.dispose();
-    super.dispose();
+    // No need to call fetchLapDetails() anymore - stream handles real-time updates
   }
 
   @override
