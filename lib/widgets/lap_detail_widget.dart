@@ -80,24 +80,65 @@ class ComprehensiveTyreWidget extends StatelessWidget {
             Positioned(
               top: 0,
               right: 0,
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
-                ),
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color(0xFFE10600), Color(0xFFB80500)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  GestureDetector(
+                    onTap: () => _showTrackKnowledgeDialog(
+                      context,
+                      tyre.track,
+                      tyre.trackKnowledge,
+                    ),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [Color(0xFFE10600), Color(0xFFB80500)],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(
+                            Icons.info_outline,
+                            color: Colors.white,
+                            size: 16,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            'TRACK KNOWLEDGE',
+                            style: F1Fonts.label(color: Colors.white),
+                          ),
+                          const SizedBox(width: 6),
+                          const Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.white,
+                            size: 12,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Track Temperature
-                    Row(
+                  const SizedBox(height: 8),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Color(0xFFE10600), Color(0xFFB80500)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
+                    child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         const Icon(
@@ -120,34 +161,22 @@ class ComprehensiveTyreWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8),
-                    // Strategy
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(
-                          Icons.timeline,
-                          color: Colors.white,
-                          size: 16,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          'STRATEGY',
-                          style: F1Fonts.label(color: Colors.white),
-                        ),
-                        const SizedBox(width: 6),
-                        Text(
-                          tyre.strategy.toUpperCase(),
-                          style: F1Fonts.data(
-                            fontSize: 13,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
+                  ),
+                  const SizedBox(height: 8),
+                  // Track Container
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
                     ),
-                    const SizedBox(height: 8),
-                    // Current Track
-                    Row(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Color(0xFFE10600), Color(0xFFB80500)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
+                    child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         const Icon(
@@ -170,11 +199,120 @@ class ComprehensiveTyreWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 8),
+                  // Strategy Container
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Color(0xFFE10600), Color(0xFFB80500)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(
+                          Icons.timeline,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          'STRATEGY',
+                          style: F1Fonts.label(color: Colors.white),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          tyre.strategy.toUpperCase(),
+                          style: F1Fonts.data(
+                            fontSize: 13,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                ],
               ),
             ),
           ],
+        );
+      },
+    );
+  }
+
+  void _showTrackKnowledgeDialog(
+    BuildContext context,
+    String trackName,
+    String trackKnowledge,
+  ) {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black.withAlpha(200),
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.transparent,
+          contentPadding: EdgeInsets.zero,
+          content: Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).cardColor,
+              border: Border.all(color: Colors.grey.withOpacity(0.1), width: 1),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Header title
+                  Text('TRACK KNOWLEDGE', style: F1Fonts.positionTitle()),
+                  const SizedBox(height: 16),
+                  Text(
+                    trackKnowledge,
+                    style: F1Fonts.label(fontSize: 14, color: Colors.grey[300]),
+                  ),
+                  const SizedBox(height: 20),
+                  // Close button
+                  Center(
+                    child: Container(
+                      width: 120,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: const Color(0xFFE10600),
+                          width: 2,
+                        ),
+                        color: Colors.transparent,
+                      ),
+                      child: TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.zero,
+                          ),
+                        ),
+                        child: Text(
+                          'CLOSE',
+                          style: F1Fonts.data(
+                            color: const Color(0xFFE10600),
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         );
       },
     );
