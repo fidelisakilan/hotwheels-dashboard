@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:f1_analyzer/model/lap_detail_model.dart';
 import 'package:f1_analyzer/utils/f1_fonts.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'dart:math' as math;
 
 class LapDetailWidget extends StatefulWidget {
@@ -67,18 +68,22 @@ class ComprehensiveTyreWidget extends StatelessWidget {
                 _ComprehensiveTyreWidget(
                   position: 'Front Left',
                   tyreDetail: tyre.frontLeft,
+                  tyre: tyre,
                 ),
                 _ComprehensiveTyreWidget(
                   position: 'Front Right',
                   tyreDetail: tyre.frontRight,
+                  tyre: tyre,
                 ),
                 _ComprehensiveTyreWidget(
                   position: 'Rear Left',
                   tyreDetail: tyre.rearLeft,
+                  tyre: tyre,
                 ),
                 _ComprehensiveTyreWidget(
                   position: 'Rear Right',
                   tyreDetail: tyre.rearRight,
+                  tyre: tyre,
                 ),
               ],
             ),
@@ -317,9 +322,11 @@ class _ComprehensiveTyreWidget extends StatelessWidget {
   const _ComprehensiveTyreWidget({
     required this.position,
     required this.tyreDetail,
+    required this.tyre,
   });
   final String position;
   final TyreDetailModel tyreDetail;
+  final TyreModel tyre;
 
   @override
   Widget build(BuildContext context) {
@@ -351,7 +358,89 @@ class _ComprehensiveTyreWidget extends StatelessWidget {
               ],
             ),
           ),
+          // Tyre compound graphic positioned at bottom-right
+          Positioned(
+            bottom: -20,
+            right: -20,
+            child: _buildTyreCompoundGraphic(),
+          ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildTyreCompoundGraphic() {
+    // Use the main tyre model's compound for all tyres
+    String compound;
+    Color compoundColor;
+
+    switch (tyre.compound) {
+      case TyreCompound.soft:
+        compound = 'S';
+        compoundColor = TyreCompound.soft.color;
+        break;
+      case TyreCompound.medium:
+        compound = 'M';
+        compoundColor = TyreCompound.medium.color;
+        break;
+      case TyreCompound.hard:
+        compound = 'H';
+        compoundColor = TyreCompound.hard.color;
+        break;
+      case TyreCompound.intermediate:
+        compound = 'I';
+        compoundColor = TyreCompound.intermediate.color;
+        break;
+      case TyreCompound.wet:
+        compound = 'W';
+        compoundColor = TyreCompound.wet.color;
+        break;
+    }
+
+    return Opacity(
+      opacity: 0.5,
+      child: Container(
+        width: 200,
+        height: 200,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            // Outer tyre ring with dotted border
+            DottedBorder(
+              color: compoundColor,
+              strokeWidth: 4,
+              dashPattern: [8, 4],
+              borderType: BorderType.Circle,
+              child: Container(
+                width: 200,
+                height: 200,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.grey[800],
+                ),
+              ),
+            ),
+            // Inner tyre structure
+            Container(
+              width: 160,
+              height: 160,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.grey[900],
+                border: Border.all(color: Colors.grey[600]!, width: 2),
+              ),
+            ),
+            // Compound circle in center (without text)
+            Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: compoundColor,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
