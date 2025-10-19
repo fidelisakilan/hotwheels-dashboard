@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:f1_analyzer/model/lap_detail_model.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:f1_analyzer/utils/f1_fonts.dart';
 import 'dart:math' as math;
 
 class LapDetailWidget extends StatefulWidget {
@@ -99,22 +99,12 @@ class ComprehensiveTyreWidget extends StatelessWidget {
                     const SizedBox(width: 8),
                     Text(
                       'TRACK TEMP',
-                      style: GoogleFonts.inter(
-                        color: Colors.white,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w800,
-                        letterSpacing: 1.2,
-                      ),
+                      style: F1Fonts.label(color: Colors.white),
                     ),
                     const SizedBox(width: 6),
                     Text(
                       '${tyre.trackTemperature}°C',
-                      style: GoogleFonts.inter(
-                        color: Colors.white,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w800,
-                        letterSpacing: 0.5,
-                      ),
+                      style: F1Fonts.data(fontSize: 13, color: Colors.white),
                     ),
                   ],
                 ),
@@ -149,15 +139,7 @@ class _ComprehensiveTyreWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  position,
-                  style: GoogleFonts.inter(
-                    fontWeight: FontWeight.w900,
-                    fontSize: 20,
-                    color: const Color(0xFFE10600),
-                    letterSpacing: -0.2,
-                  ),
-                ),
+                Text(position, style: F1Fonts.positionTitle()),
                 const SizedBox(height: 12),
                 _buildTyreColorSection(),
                 const SizedBox(height: 8),
@@ -214,23 +196,10 @@ class _ComprehensiveTyreWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'TYRE COLOR',
-                style: GoogleFonts.inter(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.grey[400],
-                  letterSpacing: 1.2,
-                ),
-              ),
+              Text('TYRE COLOR', style: F1Fonts.label(color: Colors.grey[400])),
               Text(
                 tyreDetail.color.displayName.toUpperCase(),
-                style: GoogleFonts.inter(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                  letterSpacing: 0.5,
-                ),
+                style: F1Fonts.data(fontSize: 15),
               ),
             ],
           ),
@@ -285,21 +254,11 @@ class _ComprehensiveTyreWidget extends StatelessWidget {
             children: [
               Text(
                 'WEAR PATTERN',
-                style: GoogleFonts.inter(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.grey[400],
-                  letterSpacing: 1.2,
-                ),
+                style: F1Fonts.label(color: Colors.grey[400]),
               ),
               Text(
                 tyreDetail.wearPattern.displayName.toUpperCase(),
-                style: GoogleFonts.inter(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w700,
-                  color: color,
-                  letterSpacing: 0.5,
-                ),
+                style: F1Fonts.data(fontSize: 15, color: color),
               ),
             ],
           ),
@@ -337,22 +296,15 @@ class _ComprehensiveTyreWidget extends StatelessWidget {
             children: [
               Text(
                 'SIDEWALL DEFORMATION',
-                style: GoogleFonts.inter(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.grey[400],
-                  letterSpacing: 1.2,
-                ),
+                style: F1Fonts.label(color: Colors.grey[400]),
               ),
               Text(
                 tyreDetail.sidewallDefomation ? 'DEFORMED' : 'NORMAL',
-                style: GoogleFonts.inter(
+                style: F1Fonts.data(
                   fontSize: 15,
-                  fontWeight: FontWeight.w700,
                   color: tyreDetail.sidewallDefomation
                       ? Colors.red
                       : Colors.green,
-                  letterSpacing: 0.5,
                 ),
               ),
             ],
@@ -389,22 +341,12 @@ class _ComprehensiveTyreWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'GRAINING',
-                style: GoogleFonts.inter(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.grey[400],
-                  letterSpacing: 1.2,
-                ),
-              ),
+              Text('GRAINING', style: F1Fonts.label(color: Colors.grey[400])),
               Text(
                 tyreDetail.isGraining ? 'GRAINING' : 'NORMAL',
-                style: GoogleFonts.inter(
+                style: F1Fonts.data(
                   fontSize: 15,
-                  fontWeight: FontWeight.w700,
                   color: tyreDetail.isGraining ? Colors.orange : Colors.green,
-                  letterSpacing: 0.5,
                 ),
               ),
             ],
@@ -436,21 +378,11 @@ class _ComprehensiveTyreWidget extends StatelessWidget {
             children: [
               Text(
                 'TEMPERATURE',
-                style: GoogleFonts.inter(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.grey[400],
-                  letterSpacing: 1.2,
-                ),
+                style: F1Fonts.label(color: Colors.grey[400]),
               ),
               Text(
                 '${tyreDetail.tyreTemperature}°C',
-                style: GoogleFonts.inter(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w700,
-                  color: color,
-                  letterSpacing: 0.5,
-                ),
+                style: F1Fonts.data(fontSize: 15, color: color),
               ),
             ],
           ),
@@ -479,23 +411,10 @@ class _ComprehensiveTyreWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'PRESSURE',
-                style: GoogleFonts.inter(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.grey[400],
-                  letterSpacing: 1.2,
-                ),
-              ),
+              Text('PRESSURE', style: F1Fonts.label(color: Colors.grey[400])),
               Text(
                 '${tyreDetail.tyrePressure} PSI',
-                style: GoogleFonts.inter(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w700,
-                  color: color,
-                  letterSpacing: 0.5,
-                ),
+                style: F1Fonts.data(fontSize: 15, color: color),
               ),
             ],
           ),

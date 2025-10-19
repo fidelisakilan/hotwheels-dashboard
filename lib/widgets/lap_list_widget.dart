@@ -1,4 +1,5 @@
 import 'package:f1_analyzer/model/lap_detail_model.dart';
+import 'package:f1_analyzer/utils/f1_fonts.dart';
 import 'package:flutter/material.dart';
 
 class LapListWidget extends StatefulWidget {
@@ -33,16 +34,12 @@ class _LapListWidgetState extends State<LapListWidget> {
             title: Row(
               children: [
                 Text(
-                  "Lap ${lap.lapNumber}",
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  "LAP ${lap.lapNumber}",
+                  style: F1Fonts.lapTitle(
                     color: index == widget.selectedIndex
-                        ? Colors
-                              .white // White text when selected
-                        : Colors.white, // White text for all items
-                    fontWeight: index == widget.selectedIndex
-                        ? FontWeight
-                              .w800 // Bold when selected
-                        : FontWeight.w500, // Normal when not selected
+                        ? Colors.white
+                        : Colors.white70,
+                    fontSize: index == widget.selectedIndex ? 18 : 16,
                   ),
                 ),
                 Spacer(),
