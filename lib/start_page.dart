@@ -37,7 +37,7 @@ class _StartPageState extends State<StartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFFE10600),
+        backgroundColor: Colors.transparent,
         title: Text(
           'HotWheels',
           style: Theme.of(
@@ -45,29 +45,38 @@ class _StartPageState extends State<StartPage> {
           ).textTheme.titleLarge?.copyWith(color: Colors.white),
         ),
       ),
-      body: StreamBuilder<List<TyreModel>>(
-        stream: bloc.lapDetailsStream,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return Row(
-              children: [
-                SizedBox(
-                  width: 200,
-                  child: LapListWidget(
-                    laps: snapshot.data!,
-                    onTap: setSelectedIndex,
-                    selectedIndex: selectedIndex,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Color(0xFF0A0A0A), Color(0xFF1A1A1A), Color(0xFF0F0F0F)],
+          ),
+        ),
+        child: StreamBuilder<List<TyreModel>>(
+          stream: bloc.lapDetailsStream,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Row(
+                children: [
+                  SizedBox(
+                    width: 200,
+                    child: LapListWidget(
+                      laps: snapshot.data!,
+                      onTap: setSelectedIndex,
+                      selectedIndex: selectedIndex,
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: LapDetailWidget(tyre: snapshot.data![selectedIndex]),
-                ),
-              ],
-            );
-          } else {
-            return LinearProgressIndicator();
-          }
-        },
+                  Expanded(
+                    child: LapDetailWidget(tyre: snapshot.data![selectedIndex]),
+                  ),
+                ],
+              );
+            } else {
+              return LinearProgressIndicator();
+            }
+          },
+        ),
       ),
     );
   }

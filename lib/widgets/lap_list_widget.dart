@@ -23,26 +23,32 @@ class _LapListWidgetState extends State<LapListWidget> {
       itemCount: widget.laps.length,
       itemBuilder: (context, index) {
         final lap = widget.laps[index];
-        return ListTile(
-          onTap: () => widget.onTap(index),
-          selectedTileColor: index == widget.selectedIndex
+        return Container(
+          color: index == widget.selectedIndex
               ? const Color(0xFFE10600) // F1 red background when selected
-              : null,
-          selected: index == widget.selectedIndex,
-          title: Row(
-            children: [
-              Text(
-                "Lap ${lap.lapNumber}",
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: index == widget.selectedIndex
-                      ? Colors
-                            .white // White text when selected
-                      : null, // Default theme color when not selected
+              : Colors.transparent,
+          child: ListTile(
+            onTap: () => widget.onTap(index),
+            selected: index == widget.selectedIndex,
+            title: Row(
+              children: [
+                Text(
+                  "Lap ${lap.lapNumber}",
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: index == widget.selectedIndex
+                        ? Colors
+                              .white // White text when selected
+                        : Colors.white, // White text for all items
+                    fontWeight: index == widget.selectedIndex
+                        ? FontWeight
+                              .w800 // Bold when selected
+                        : FontWeight.w500, // Normal when not selected
+                  ),
                 ),
-              ),
-              Spacer(),
-              TyreIconWidget(compound: lap.compound),
-            ],
+                Spacer(),
+                TyreIconWidget(compound: lap.compound),
+              ],
+            ),
           ),
         );
       },
