@@ -83,7 +83,7 @@ class ComprehensiveTyreWidget extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
-                  vertical: 8,
+                  vertical: 12,
                 ),
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
@@ -92,19 +92,83 @@ class ComprehensiveTyreWidget extends StatelessWidget {
                     end: Alignment.bottomRight,
                   ),
                 ),
-                child: Row(
+                child: Column(
                   mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.thermostat, color: Colors.white, size: 16),
-                    const SizedBox(width: 8),
-                    Text(
-                      'TRACK TEMP',
-                      style: F1Fonts.label(color: Colors.white),
+                    // Track Temperature
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(
+                          Icons.thermostat,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          'TRACK TEMP',
+                          style: F1Fonts.label(color: Colors.white),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          '${tyre.trackTemperature}°C',
+                          style: F1Fonts.data(
+                            fontSize: 13,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: 6),
-                    Text(
-                      '${tyre.trackTemperature}°C',
-                      style: F1Fonts.data(fontSize: 13, color: Colors.white),
+                    const SizedBox(height: 8),
+                    // Strategy
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(
+                          Icons.timeline,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          'STRATEGY',
+                          style: F1Fonts.label(color: Colors.white),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          tyre.strategy.toUpperCase(),
+                          style: F1Fonts.data(
+                            fontSize: 13,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    // Current Track
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(
+                          Icons.location_on,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          'TRACK',
+                          style: F1Fonts.label(color: Colors.white),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          tyre.track.toUpperCase(),
+                          style: F1Fonts.data(
+                            fontSize: 13,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

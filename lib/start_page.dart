@@ -36,9 +36,19 @@ class _StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: bloc.storeDummyLapDetails,
-        child: Icon(Icons.refresh),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: bloc.storeDummyLapDetails,
+            child: Icon(Icons.delete),
+          ),
+          SizedBox(width: 10),
+          FloatingActionButton(
+            onPressed: bloc.fetchLapDetails,
+            child: Icon(Icons.refresh),
+          ),
+        ],
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -52,6 +62,10 @@ class _StartPageState extends State<StartPage> {
           children: [
             AppBar(
               backgroundColor: Colors.transparent,
+              animateColor: false,
+              surfaceTintColor: Colors.transparent,
+              elevation: 0,
+              centerTitle: true,
               title: Text(
                 'HotWheels',
                 style: Theme.of(
@@ -64,17 +78,24 @@ class _StartPageState extends State<StartPage> {
                 stream: bloc.lapDetailsStream,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    return Row(
+                    return Stack(
                       children: [
-                        SizedBox(
-                          width: 200,
-                          child: LapListWidget(
-                            laps: snapshot.data!,
-                            onTap: setSelectedIndex,
-                            selectedIndex: selectedIndex,
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: SizedBox(
+                            width: 200,
+                            height: double.infinity,
+                            child: LapListWidget(
+                              laps: List.from([
+                                ...snapshot.data!,
+                                ...snapshot.data!,
+                              ]),
+                              onTap: setSelectedIndex,
+                              selectedIndex: selectedIndex,
+                            ),
                           ),
                         ),
-                        Expanded(
+                        Center(
                           child: LapDetailWidget(
                             tyre: snapshot.data![selectedIndex],
                           ),
