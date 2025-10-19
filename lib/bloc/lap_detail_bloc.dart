@@ -124,12 +124,8 @@ class LapDetailBloc {
 
       return TyreModel(
         strategy: data['strategy'] as String? ?? '',
-        track:
-            data['track_strategy'] as String? ??
-            '', // Using track_strategy as track info
-        trackKnowledge:
-            data['track_strategy'] as String? ??
-            '', // Using track_strategy as track knowledge
+        track: data['track'] as String? ?? '',
+        trackKnowledge: data['track_strategy'] as String? ?? '',
         lapNumber: (data['lap_number'] as num?)?.toInt() ?? 0,
         compound: compound,
         trackTemperature: (data['track_temperature'] as num?)?.toInt() ?? 0,

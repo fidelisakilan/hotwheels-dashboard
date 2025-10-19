@@ -156,7 +156,6 @@ class ComprehensiveTyreWidget extends StatelessWidget {
   Widget _buildSlimTrackCard() {
     return Container(
       width: 240,
-      height: 80,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -189,7 +188,6 @@ class ComprehensiveTyreWidget extends StatelessWidget {
                     fontSize: 14,
                     color: Colors.white,
                   ).copyWith(fontWeight: FontWeight.bold),
-                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               Text(
