@@ -1,16 +1,42 @@
-# f1_analyzer
+# Overview
 
-A new Flutter project.
+PitPundits is a sophisticated tire analysis dashboard that visualizes critical tire data including compound types, wear patterns, temperature readings, and pressure measurements. The application features a modern dark theme with F1-inspired styling and provides detailed analytics for each tire position on the vehicle.
 
-## Getting Started
+![PitPundits Dashboard](assets/dashboard.png)
 
-This project is a starting point for a Flutter application.
+## Technology Stack
 
-A few resources to get you started if this is your first Flutter project:
+- **Frontend**: Flutter
+- **Backend**: Firebase Firestore
+- **UI Framework**: Material Design 3
+- **Typography**: Google Fonts (Inter)
+- **Deployment**: Firebase Hosting
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Live Application
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The application is deployed and accessible at: [https://hotwheels-ea3df.web.app/](https://hotwheels-ea3df.web.app/)
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone <repository-url>
+cd f1_analyzer
+```
+
+2. Install dependencies:
+
+```bash
+flutter pub get
+```
+
+3. Configure Firebase:
+   - Ensure Firebase project is properly configured
+   - Update `firebase_options.dart` with your project credentials
+
+4. Run the application:
+
+```bash
+flutter run
+```
