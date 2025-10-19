@@ -86,10 +86,7 @@ class _StartPageState extends State<StartPage> {
                             width: 200,
                             height: double.infinity,
                             child: LapListWidget(
-                              laps: List.from([
-                                ...snapshot.data!,
-                                ...snapshot.data!,
-                              ]),
+                              laps: snapshot.data!,
                               onTap: setSelectedIndex,
                               selectedIndex: selectedIndex,
                             ),

@@ -31,220 +31,214 @@ class ComprehensiveTyreWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (context, constraints) {
-        const crossAxisCount = 2;
-        const spacing = 16.0;
+      builder: (builderContext, constraints) {
+        return _buildIntegratedGridWithCards(constraints, context);
+      },
+    );
+  }
 
-        final availableWidth =
-            (constraints.maxWidth - spacing * (crossAxisCount - 1));
-        final availableHeight =
-            (constraints.maxHeight - spacing * (crossAxisCount - 1));
-        final cellSize = math.min(
-          availableWidth / crossAxisCount,
-          availableHeight / crossAxisCount,
-        );
-        return Stack(
-          children: [
-            Center(
-              child: SizedBox(
-                width:
-                    cellSize * crossAxisCount + spacing * (crossAxisCount - 1),
-                height:
-                    cellSize * crossAxisCount + spacing * (crossAxisCount - 1),
-                child: GridView.count(
-                  crossAxisCount: crossAxisCount,
-                  crossAxisSpacing: spacing,
-                  mainAxisSpacing: spacing,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    _ComprehensiveTyreWidget(
-                      position: 'Front Left',
-                      tyreDetail: tyre.frontLeft,
-                    ),
-                    _ComprehensiveTyreWidget(
-                      position: 'Front Right',
-                      tyreDetail: tyre.frontRight,
-                    ),
-                    _ComprehensiveTyreWidget(
-                      position: 'Rear Left',
-                      tyreDetail: tyre.rearLeft,
-                    ),
-                    _ComprehensiveTyreWidget(
-                      position: 'Rear Right',
-                      tyreDetail: tyre.rearRight,
-                    ),
-                  ],
+  Widget _buildIntegratedGridWithCards(
+    BoxConstraints constraints,
+    BuildContext context,
+  ) {
+    const crossAxisCount = 2;
+    const spacing = 16.0;
+
+    final availableWidth = constraints.maxWidth;
+    final availableHeight = constraints.maxHeight;
+    final cellSize = math.min(
+      availableWidth / crossAxisCount,
+      availableHeight / crossAxisCount,
+    );
+
+    return Stack(
+      children: [
+        // Tyre Grid
+        Center(
+          child: SizedBox(
+            width: cellSize * crossAxisCount + spacing * (crossAxisCount - 1),
+            height: cellSize * crossAxisCount + spacing * (crossAxisCount - 1),
+            child: GridView.count(
+              crossAxisCount: crossAxisCount,
+              crossAxisSpacing: spacing,
+              mainAxisSpacing: spacing,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                _ComprehensiveTyreWidget(
+                  position: 'Front Left',
+                  tyreDetail: tyre.frontLeft,
+                ),
+                _ComprehensiveTyreWidget(
+                  position: 'Front Right',
+                  tyreDetail: tyre.frontRight,
+                ),
+                _ComprehensiveTyreWidget(
+                  position: 'Rear Left',
+                  tyreDetail: tyre.rearLeft,
+                ),
+                _ComprehensiveTyreWidget(
+                  position: 'Rear Right',
+                  tyreDetail: tyre.rearRight,
+                ),
+              ],
+            ),
+          ),
+        ),
+        // Slim Cards in a column on the right center
+        Positioned(
+          right: 20,
+          top: 0,
+          bottom: 0,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                // Strategy Card
+                _buildSlimStrategyCard(),
+                const SizedBox(height: 12),
+                // Track Card
+                _buildSlimTrackCard(),
+                const SizedBox(height: 12),
+                // AI Insights Card
+                _buildSlimAIInsightsCard(context),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSlimStrategyCard() {
+    return Container(
+      width: 240,
+      height: 80,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color(0xFFE10600), Color(0xFFB80500)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.timeline, color: Colors.white, size: 16),
+              const SizedBox(width: 6),
+              Text(
+                'STRATEGY',
+                style: F1Fonts.label(color: Colors.white, fontSize: 10),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Text(
+            tyre.strategy.toUpperCase(),
+            style: F1Fonts.data(
+              fontSize: 14,
+              color: Colors.white,
+            ).copyWith(fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSlimTrackCard() {
+    return Container(
+      width: 240,
+      height: 80,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color(0xFF1E3A8A), Color(0xFF1E40AF)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.location_on, color: Colors.white, size: 16),
+              const SizedBox(width: 6),
+              Text(
+                'TRACK',
+                style: F1Fonts.label(color: Colors.white, fontSize: 10),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  tyre.track.toUpperCase(),
+                  style: F1Fonts.data(
+                    fontSize: 14,
+                    color: Colors.white,
+                  ).copyWith(fontWeight: FontWeight.bold),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
-            ),
-            Positioned(
-              top: 0,
-              right: 0,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  GestureDetector(
-                    onTap: () => _showTrackKnowledgeDialog(
-                      context,
-                      tyre.track,
-                      tyre.trackKnowledge,
-                    ),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 12,
-                      ),
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Color(0xFFE10600), Color(0xFFB80500)],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(
-                            Icons.info_outline,
-                            color: Colors.white,
-                            size: 16,
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            'TRACK KNOWLEDGE',
-                            style: F1Fonts.label(color: Colors.white),
-                          ),
-                          const SizedBox(width: 6),
-                          const Icon(
-                            Icons.arrow_forward_ios,
-                            color: Colors.white,
-                            size: 12,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
-                    ),
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xFFE10600), Color(0xFFB80500)],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(
-                          Icons.thermostat,
-                          color: Colors.white,
-                          size: 16,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          'TRACK TEMP',
-                          style: F1Fonts.label(color: Colors.white),
-                        ),
-                        const SizedBox(width: 6),
-                        Text(
-                          '${tyre.trackTemperature}°C',
-                          style: F1Fonts.data(
-                            fontSize: 13,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  // Track Container
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
-                    ),
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xFFE10600), Color(0xFFB80500)],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(
-                          Icons.location_on,
-                          color: Colors.white,
-                          size: 16,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          'TRACK',
-                          style: F1Fonts.label(color: Colors.white),
-                        ),
-                        const SizedBox(width: 6),
-                        Text(
-                          tyre.track.toUpperCase(),
-                          style: F1Fonts.data(
-                            fontSize: 13,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  // Strategy Container
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
-                    ),
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xFFE10600), Color(0xFFB80500)],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(
-                          Icons.timeline,
-                          color: Colors.white,
-                          size: 16,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          'STRATEGY',
-                          style: F1Fonts.label(color: Colors.white),
-                        ),
-                        const SizedBox(width: 6),
-                        Text(
-                          tyre.strategy.toUpperCase(),
-                          style: F1Fonts.data(
-                            fontSize: 13,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                ],
+              Text(
+                '${tyre.trackTemperature}°C',
+                style: F1Fonts.label(
+                  fontSize: 10,
+                  color: Colors.white.withOpacity(0.8),
+                ),
               ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSlimAIInsightsCard(BuildContext context) {
+    return GestureDetector(
+      onTap: () =>
+          _showTrackKnowledgeDialog(context, tyre.track, tyre.trackKnowledge),
+      child: Container(
+        width: 240,
+        height: 80,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF059669), Color(0xFF047857)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.psychology, color: Colors.white, size: 16),
+                const SizedBox(width: 6),
+                Text(
+                  'AI INSIGHTS',
+                  style: F1Fonts.label(color: Colors.white, fontSize: 10),
+                ),
+              ],
             ),
+            const SizedBox(height: 4),
+            Text(
+              tyre.trackKnowledge,
+              style: F1Fonts.label(color: Colors.white, fontSize: 10),
+            ),
+            const SizedBox(height: 4),
           ],
-        );
-      },
+        ),
+      ),
     );
   }
 
@@ -498,7 +492,7 @@ class _ComprehensiveTyreWidget extends StatelessWidget {
             children: [
               Text(
                 'SIDEWALL DEFORMATION',
-                style: F1Fonts.label(color: Colors.grey[400]),
+                style: F1Fonts.label(color: Colors.grey[400], fontSize: 8),
               ),
               Text(
                 tyreDetail.sidewallDefomation ? 'DEFORMED' : 'NORMAL',
@@ -543,7 +537,10 @@ class _ComprehensiveTyreWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('GRAINING', style: F1Fonts.label(color: Colors.grey[400])),
+              Text(
+                'GRAINING',
+                style: F1Fonts.label(color: Colors.grey[400], fontSize: 8),
+              ),
               Text(
                 tyreDetail.isGraining ? 'GRAINING' : 'NORMAL',
                 style: F1Fonts.data(
@@ -580,10 +577,10 @@ class _ComprehensiveTyreWidget extends StatelessWidget {
             children: [
               Text(
                 'TEMPERATURE',
-                style: F1Fonts.label(color: Colors.grey[400]),
+                style: F1Fonts.label(color: Colors.grey[400], fontSize: 8),
               ),
               Text(
-                '${tyreDetail.tyreTemperature}°C',
+                '${tyreDetail.tyreTemperature}°C'.toUpperCase(),
                 style: F1Fonts.data(fontSize: 15, color: color),
               ),
             ],
@@ -613,9 +610,12 @@ class _ComprehensiveTyreWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('PRESSURE', style: F1Fonts.label(color: Colors.grey[400])),
               Text(
-                '${tyreDetail.tyrePressure} PSI',
+                'PRESSURE',
+                style: F1Fonts.label(color: Colors.grey[400], fontSize: 8),
+              ),
+              Text(
+                '${tyreDetail.tyrePressure} PSI'.toUpperCase(),
                 style: F1Fonts.data(fontSize: 15, color: color),
               ),
             ],
