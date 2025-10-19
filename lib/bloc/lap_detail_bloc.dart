@@ -22,6 +22,9 @@ class LapDetailBloc {
         batch.set(docRef, {
           'compound': lapDetail.compound.toString().split('.').last,
           'lapNumber': lapDetail.lapNumber,
+          'strategy': lapDetail.strategy,
+          'track': lapDetail.track,
+          'trackKnowledge': lapDetail.trackKnowledge,
           'trackTemperature': lapDetail.trackTemperature,
           'frontLeft': {
             'color': lapDetail.frontLeft.color.toString().split('.').last,
@@ -189,6 +192,9 @@ class LapDetailBloc {
       }
 
       return TyreModel(
+        strategy: data['strategy'] as String? ?? '',
+        track: data['track'] as String? ?? '',
+        trackKnowledge: data['trackKnowledge'] as String? ?? '',
         lapNumber: data['lapNumber'] as int? ?? 0,
         compound: compound,
         trackTemperature: data['trackTemperature'] as int? ?? 0,

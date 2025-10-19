@@ -3,6 +3,10 @@ import 'package:f1_analyzer/model/lap_detail_model.dart';
 final List<TyreModel> dummyLapDetails = [
   // Lap 1 - Fresh soft tires, cool track
   TyreModel(
+    strategy: 'PIT',
+    track: 'Monza',
+    trackKnowledge:
+        'The driver shouldn\'t run over the kerbs in corners 1 and 2',
     compound: TyreCompound.soft,
     lapNumber: 1,
     trackTemperature: 20,
@@ -42,6 +46,10 @@ final List<TyreModel> dummyLapDetails = [
 
   // Lap 2 - Early graining on soft compound
   TyreModel(
+    strategy: 'PIT',
+    track: 'Monza',
+    trackKnowledge:
+        'The driver shouldn\'t run over the kerbs in corners 1 and 2',
     compound: TyreCompound.soft,
     lapNumber: 2,
     trackTemperature: 22,
@@ -81,6 +89,10 @@ final List<TyreModel> dummyLapDetails = [
 
   // Lap 3 - Graining continues
   TyreModel(
+    strategy: 'PIT',
+    track: 'Monza',
+    trackKnowledge:
+        'The driver shouldn\'t run over the kerbs in corners 1 and 2',
     compound: TyreCompound.soft,
     lapNumber: 3,
     trackTemperature: 24,
@@ -120,6 +132,10 @@ final List<TyreModel> dummyLapDetails = [
 
   // Lap 4 - Front tires showing inner wear
   TyreModel(
+    strategy: 'PIT',
+    track: 'Monza',
+    trackKnowledge:
+        'The driver shouldn\'t run over the kerbs in corners 1 and 2',
     compound: TyreCompound.soft,
     lapNumber: 4,
     trackTemperature: 26,
@@ -159,6 +175,10 @@ final List<TyreModel> dummyLapDetails = [
 
   // Lap 5 - Tire color starting to change
   TyreModel(
+    strategy: 'PIT',
+    track: 'Monza',
+    trackKnowledge:
+        'The driver shouldn\'t run over the kerbs in corners 1 and 2',
     compound: TyreCompound.soft,
     lapNumber: 5,
     trackTemperature: 28,
@@ -198,6 +218,10 @@ final List<TyreModel> dummyLapDetails = [
 
   // Lap 6 - More wear progression
   TyreModel(
+    strategy: 'PIT',
+    track: 'Monza',
+    trackKnowledge:
+        'The driver shouldn\'t run over the kerbs in corners 1 and 2',
     compound: TyreCompound.soft,
     lapNumber: 6,
     trackTemperature: 30,
@@ -237,6 +261,10 @@ final List<TyreModel> dummyLapDetails = [
 
   // Lap 7 - Significant wear
   TyreModel(
+    strategy: 'PIT',
+    track: 'Monza',
+    trackKnowledge:
+        'The driver shouldn\'t run over the kerbs in corners 1 and 2',
     compound: TyreCompound.soft,
     lapNumber: 7,
     trackTemperature: 32,
@@ -276,6 +304,10 @@ final List<TyreModel> dummyLapDetails = [
 
   // Lap 8 - End of first stint, heavy wear
   TyreModel(
+    strategy: 'PIT',
+    track: 'Monza',
+    trackKnowledge:
+        'The driver shouldn\'t run over the kerbs in corners 1 and 2',
     compound: TyreCompound.soft,
     lapNumber: 8,
     trackTemperature: 34,
@@ -315,6 +347,10 @@ final List<TyreModel> dummyLapDetails = [
 
   // Lap 9 - PIT STOP - Fresh medium compound tires
   TyreModel(
+    strategy: 'PIT',
+    track: 'Monza',
+    trackKnowledge:
+        'The driver shouldn\'t run over the kerbs in corners 1 and 2',
     compound: TyreCompound.medium,
     lapNumber: 9,
     trackTemperature: 36,
@@ -354,6 +390,10 @@ final List<TyreModel> dummyLapDetails = [
 
   // Lap 10 - Medium tires settling in
   TyreModel(
+    strategy: 'PIT',
+    track: 'Monza',
+    trackKnowledge:
+        'The driver shouldn\'t run over the kerbs in corners 1 and 2',
     compound: TyreCompound.medium,
     lapNumber: 10,
     trackTemperature: 38,
@@ -393,6 +433,10 @@ final List<TyreModel> dummyLapDetails = [
 
   // Lap 11 - Medium tires showing wear
   TyreModel(
+    strategy: 'PIT',
+    track: 'Monza',
+    trackKnowledge:
+        'The driver shouldn\'t run over the kerbs in corners 1 and 2',
     compound: TyreCompound.medium,
     lapNumber: 11,
     trackTemperature: 40,
@@ -433,6 +477,10 @@ final List<TyreModel> dummyLapDetails = [
   // Lap 12 - End of race, medium tires heavily worn
   TyreModel(
     compound: TyreCompound.medium,
+    strategy: 'PIT',
+    track: 'Monza',
+    trackKnowledge:
+        'The driver shouldn\'t run over the kerbs in corners 1 and 2',
     lapNumber: 12,
     trackTemperature: 42,
     frontLeft: TyreDetailModel(

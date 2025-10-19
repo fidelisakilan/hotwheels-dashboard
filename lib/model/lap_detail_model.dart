@@ -76,12 +76,18 @@ class TyreModel {
   final int lapNumber;
   final TyreCompound compound;
   final int trackTemperature;
+  final String strategy;
+  final String track;
+  final String trackKnowledge;
   final TyreDetailModel frontLeft;
   final TyreDetailModel frontRight;
   final TyreDetailModel rearLeft;
   final TyreDetailModel rearRight;
 
   TyreModel({
+    required this.strategy,
+    required this.track,
+    required this.trackKnowledge,
     required this.lapNumber,
     required this.compound,
     required this.trackTemperature,

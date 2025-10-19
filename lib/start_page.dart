@@ -38,7 +38,7 @@ class _StartPageState extends State<StartPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: bloc.storeDummyLapDetails,
-        child: Icon(Icons.add),
+        child: Icon(Icons.refresh),
       ),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
