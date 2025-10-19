@@ -36,20 +36,20 @@ class _StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            onPressed: bloc.storeDummyLapDetails,
-            child: Icon(Icons.delete),
-          ),
-          SizedBox(width: 10),
-          FloatingActionButton(
-            onPressed: bloc.fetchLapDetails,
-            child: Icon(Icons.refresh),
-          ),
-        ],
-      ),
+      // floatingActionButton: Row(
+      //   mainAxisAlignment: MainAxisAlignment.end,
+      //   children: [
+      //     FloatingActionButton(
+      //       onPressed: bloc.storeDummyLapDetails,
+      //       child: Icon(Icons.delete),
+      //     ),
+      //     SizedBox(width: 10),
+      //     FloatingActionButton(
+      //       onPressed: bloc.fetchLapDetails,
+      //       child: Icon(Icons.refresh),
+      //     ),
+      //   ],
+      // ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(

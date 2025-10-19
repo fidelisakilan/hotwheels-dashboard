@@ -207,113 +207,39 @@ class ComprehensiveTyreWidget extends StatelessWidget {
   }
 
   Widget _buildSlimAIInsightsCard(BuildContext context) {
-    return GestureDetector(
-      onTap: () =>
-          _showTrackKnowledgeDialog(context, tyre.track, tyre.trackKnowledge),
-      child: Container(
-        width: 240,
-        height: 80,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF059669), Color(0xFF047857)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const Icon(Icons.psychology, color: Colors.white, size: 16),
-                const SizedBox(width: 6),
-                Text(
-                  'AI INSIGHTS',
-                  style: F1Fonts.label(color: Colors.white, fontSize: 10),
-                ),
-              ],
-            ),
-            const SizedBox(height: 4),
-            Text(
-              tyre.trackKnowledge,
-              style: F1Fonts.label(color: Colors.white, fontSize: 10),
-            ),
-            const SizedBox(height: 4),
-          ],
+    return Container(
+      width: 240,
+      height: 80,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color(0xFF059669), Color(0xFF047857)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
       ),
-    );
-  }
-
-  void _showTrackKnowledgeDialog(
-    BuildContext context,
-    String trackName,
-    String trackKnowledge,
-  ) {
-    showDialog(
-      context: context,
-      barrierColor: Colors.black.withAlpha(200),
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.transparent,
-          contentPadding: EdgeInsets.zero,
-          content: Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
-              border: Border.all(color: Colors.grey.withOpacity(0.1), width: 1),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Header title
-                  Text('TRACK KNOWLEDGE', style: F1Fonts.positionTitle()),
-                  const SizedBox(height: 16),
-                  Text(
-                    trackKnowledge,
-                    style: F1Fonts.label(fontSize: 14, color: Colors.grey[300]),
-                  ),
-                  const SizedBox(height: 20),
-                  // Close button
-                  Center(
-                    child: Container(
-                      width: 120,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: const Color(0xFFE10600),
-                          width: 2,
-                        ),
-                        color: Colors.transparent,
-                      ),
-                      child: TextButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.zero,
-                          ),
-                        ),
-                        child: Text(
-                          'CLOSE',
-                          style: F1Fonts.data(
-                            color: const Color(0xFFE10600),
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.psychology, color: Colors.white, size: 16),
+              const SizedBox(width: 6),
+              Text(
+                'AI INSIGHTS',
+                style: F1Fonts.label(color: Colors.white, fontSize: 10),
               ),
-            ),
+            ],
           ),
-        );
-      },
+          const SizedBox(height: 4),
+          Text(
+            tyre.trackKnowledge,
+            style: F1Fonts.label(color: Colors.white, fontSize: 10),
+          ),
+          const SizedBox(height: 4),
+        ],
+      ),
     );
   }
 }
@@ -371,28 +297,22 @@ class _ComprehensiveTyreWidget extends StatelessWidget {
 
   Widget _buildTyreCompoundGraphic() {
     // Use the main tyre model's compound for all tyres
-    String compound;
     Color compoundColor;
 
     switch (tyre.compound) {
       case TyreCompound.soft:
-        compound = 'S';
         compoundColor = TyreCompound.soft.color;
         break;
       case TyreCompound.medium:
-        compound = 'M';
         compoundColor = TyreCompound.medium.color;
         break;
       case TyreCompound.hard:
-        compound = 'H';
         compoundColor = TyreCompound.hard.color;
         break;
       case TyreCompound.intermediate:
-        compound = 'I';
         compoundColor = TyreCompound.intermediate.color;
         break;
       case TyreCompound.wet:
-        compound = 'W';
         compoundColor = TyreCompound.wet.color;
         break;
     }
