@@ -67,7 +67,7 @@ class _StartPageState extends State<StartPage> {
               elevation: 0,
               centerTitle: true,
               title: Text(
-                'HotWheels',
+                'PitPundits',
                 style: Theme.of(
                   context,
                 ).textTheme.titleLarge?.copyWith(color: Colors.white),
