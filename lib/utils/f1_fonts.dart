@@ -109,6 +109,17 @@ class F1Fonts {
       height: 1.0,
     );
   }
+
+  /// F1 Body Text - Readable font for descriptions and longer text content
+  static TextStyle bodyText({Color? color, double? fontSize}) {
+    return GoogleFonts.inter(
+      fontSize: fontSize ?? 14,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0.0,
+      color: color ?? Colors.white70,
+      height: 1.4,
+    );
+  }
 }
 
 /// Extension on TextStyle to easily apply F1 font styles
@@ -139,4 +150,7 @@ extension F1TextStyleExtension on TextStyle {
 
   /// Apply F1 position title style
   TextStyle get f1PositionTitle => F1Fonts.positionTitle().merge(this);
+
+  /// Apply F1 body text style
+  TextStyle get f1BodyText => F1Fonts.bodyText().merge(this);
 }

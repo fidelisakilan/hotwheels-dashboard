@@ -209,7 +209,6 @@ class ComprehensiveTyreWidget extends StatelessWidget {
   Widget _buildSlimAIInsightsCard(BuildContext context) {
     return Container(
       width: 240,
-      height: 80,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -235,7 +234,7 @@ class ComprehensiveTyreWidget extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             tyre.trackKnowledge,
-            style: F1Fonts.label(color: Colors.white, fontSize: 10),
+            style: F1Fonts.bodyText(color: Colors.white, fontSize: 12),
           ),
           const SizedBox(height: 4),
         ],
